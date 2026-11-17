@@ -20,6 +20,23 @@
       "source": "./plugins/easyequities",
       "category": "productivity",
       "homepage": "https://github.com/heinrich321/easyequities-mcp"
+    },
+    {
+      "name": "kronos",
+      "description": "Kronos candlestick-model forecasts for JSE/US/EasyEquities tickers as a spread of sampled paths, with a backtest against naive baselines before you trust it.",
+      "source": "./plugins/kronos",
+      "category": "productivity",
+      "homepage": "https://github.com/shiyu-coder/Kronos"
+    },
+    {
+      "name": "day-trader-skill",
+      "description": "Jake Schincariol's 11 day-trading skills: scanner, news, entry and exit timing, a 10,000-run time machine, risk and budget managers, paper-first broker tickets, alerts, an earnings analyst and a Congress trade tracker. US markets.",
+      "source": {
+        "source": "github",
+        "repo": "Jakeschincariol/day-trader-skill"
+      },
+      "category": "productivity",
+      "homepage": "https://github.com/Jakeschincariol/day-trader-skill"
     }
   ]
 }

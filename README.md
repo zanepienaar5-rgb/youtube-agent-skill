@@ -104,11 +104,16 @@ touches your credentials.
 **Nothing invents a number.** If a skill wants a figure it does not have, it asks you for it or
 writes the line without it.
 
-## Also in this repo: EasyEquities
+## Also in this marketplace: investing
 
-[`plugins/easyequities`](plugins/easyequities) adds `/ee-brief`, a daily EasyEquities / Satrix
-portfolio brief, and `/ee-ask` for questions about your holdings. Install it with
-`/plugin install easyequities --marketplace zanepienaar5-rgb/youtube-agent-skill`.
+| plugin | what it gives you | install |
+| --- | --- | --- |
+| [`easyequities`](plugins/easyequities) | `/ee-brief`, the daily EasyEquities / Satrix brief (market move split from your own deposits, movers, TFSA room), and `/ee-ask` for questions about your holdings | `/plugin install easyequities --marketplace zanepienaar5-rgb/youtube-agent-skill` |
+| [`kronos`](plugins/kronos) | `/kronos-forecast`: a spread of sampled price paths from the Kronos candlestick model, plus a backtest against "no change" so you know whether to trust it | `/plugin install kronos --marketplace zanepienaar5-rgb/youtube-agent-skill` |
+| [`day-trader-skill`](https://github.com/Jakeschincariol/day-trader-skill) | Jake Schincariol's 11 day-trading skills (US markets), pulled from his repo | `/plugin install day-trader-skill --marketplace zanepienaar5-rgb/youtube-agent-skill` |
+
+Kronos needs `pip install torch numpy pandas einops huggingface_hub safetensors tqdm` and a one-time
+`python3 kronos_forecast.py setup`.
 
 ## Licence
 
