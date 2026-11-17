@@ -63,7 +63,7 @@ CTrade   trade;
 int      hFast = INVALID_HANDLE, hSlow = INVALID_HANDLE, hATR = INVALID_HANDLE;
 datetime lastBar = 0;
 int      pendingSignal = 0;      // +1 buy, -1 sell, 0 none (valid until next bar)
-string   status = "";
+string   g_status = "";
 
 //+------------------------------------------------------------------+
 int OnInit()
@@ -249,20 +249,20 @@ void ManagePosition(ulong ticket)
 void TryEnter(int dir)
 {
    double atr = Buf(hATR, 1);
-   if(atr == EMPTY_VALUE || atr <= 0) { status = "no ATR yet"; return; }
-   if(!InEntryHours())  { status = "signal waiting: outside entry hours"; return; }
-   if(!SpreadOK(atr))   { status = "signal waiting: spread too wide"; return; }
-   if(NewsNearby())     { status = "signal waiting: high-impact news nearby"; return; }
+   if(atr == EMPTY_VALUE || atr <= 0) { g_status = "no ATR yet"; return; }
+   if(!InEntryHours())  { g_status = "signal waiting: outside entry hours"; return; }
+   if(!SpreadOK(atr))   { g_status = "signal waiting: spread too wide"; return; }
+   if(NewsNearby())     { g_status = "signal waiting: high-impact news nearby"; return; }
    if(InpCarryFilter)
    {
       double swap = SymbolInfoDouble(_Symbol, dir > 0 ? SYMBOL_SWAP_LONG : SYMBOL_SWAP_SHORT);
-      if(swap < 0) { status = "signal skipped: carry filter (negative swap)"; pendingSignal = 0; return; }
+      if(swap < 0) { g_status = "signal skipped: carry filter (negative swap)"; pendingSignal = 0; return; }
    }
 
    double equity = AccountInfoDouble(ACCOUNT_EQUITY);
    double riskMoney = equity * InpRiskPct / 100.0;
    double room = equity * InpMaxTotalRiskPct / 100.0 - OpenRiskMoney();
-   if(room <= 0) { status = "signal skipped: total risk cap reached"; pendingSignal = 0; return; }
+   if(room <= 0) { g_status = "signal skipped: total risk cap reached"; pendingSignal = 0; return; }
    riskMoney = MathMin(riskMoney, room);
 
    ENUM_ORDER_TYPE ot = dir > 0 ? ORDER_TYPE_BUY : ORDER_TYPE_SELL;
@@ -275,25 +275,25 @@ void TryEnter(int dir)
    if(InpTakeProfitATR > 0) tp = NormalizeDouble(dir > 0 ? price + atr * InpTakeProfitATR : price - atr * InpTakeProfitATR, _Digits);
 
    double lossPerLot = LossMoney(_Symbol, ot, 1.0, price, sl);
-   if(lossPerLot <= 0) { status = "could not price the stop"; return; }
+   if(lossPerLot <= 0) { g_status = "could not price the stop"; return; }
    double lots = NormLots(riskMoney / lossPerLot);
    if(lots <= 0)
    {
-      status = StringFormat("signal skipped: minimum lot would risk more than %.2f", riskMoney);
-      Print("DailyTrend: ", status, " on ", _Symbol, ". Account too small for this stop at this risk %.");
+      g_status = StringFormat("signal skipped: minimum lot would risk more than %.2f", riskMoney);
+      Print("DailyTrend: ", g_status, " on ", _Symbol, ". Account too small for this stop at this risk %.");
       pendingSignal = 0; return;
    }
    bool ok = dir > 0 ? trade.Buy(lots, _Symbol, 0, sl, tp, "DailyTrend")
                      : trade.Sell(lots, _Symbol, 0, sl, tp, "DailyTrend");
    if(ok && (trade.ResultRetcode() == TRADE_RETCODE_DONE || trade.ResultRetcode() == TRADE_RETCODE_PLACED))
    {
-      status = StringFormat("%s %.2f lots, SL %s, risk about %.2f", dir > 0 ? "BOUGHT" : "SOLD", lots,
+      g_status = StringFormat("%s %.2f lots, SL %s, risk about %.2f", dir > 0 ? "BOUGHT" : "SOLD", lots,
                             DoubleToString(sl, _Digits), LossMoney(_Symbol, ot, lots, price, sl));
-      Print("DailyTrend: ", status, " ", _Symbol);
+      Print("DailyTrend: ", g_status, " ", _Symbol);
       pendingSignal = 0;
    }
    else
-      status = StringFormat("order failed: %d %s", trade.ResultRetcode(), trade.ResultRetcodeDescription());
+      g_status = StringFormat("order failed: %d %s", trade.ResultRetcode(), trade.ResultRetcodeDescription());
 }
 
 //+------------------------------------------------------------------+
@@ -307,7 +307,7 @@ void OnTick()
    if(DailyLimitHit())
    {
       pendingSignal = 0;
-      status = "daily loss limit hit: no new trades today";
+      g_status = "daily loss limit hit: no new trades today";
       if(InpCloseAllOnDailyLimit && have) trade.PositionClose(ticket);
    }
 
@@ -320,12 +320,12 @@ void OnTick()
       else if(!DailyLimitHit())
       {
          pendingSignal = Signal();
-         status = pendingSignal == 0 ? "no setup today" : (pendingSignal > 0 ? "BUY setup, waiting to enter" : "SELL setup, waiting to enter");
+         g_status = pendingSignal == 0 ? "no setup today" : (pendingSignal > 0 ? "BUY setup, waiting to enter" : "SELL setup, waiting to enter");
       }
    }
    if(!have && pendingSignal != 0 && !DailyLimitHit()) TryEnter(pendingSignal);
 
    Comment(StringFormat("DailyTrend  %s\n%s\nopen risk (all charts): %.2f of %.2f cap",
-           _Symbol, status, OpenRiskMoney(), AccountInfoDouble(ACCOUNT_EQUITY) * InpMaxTotalRiskPct / 100.0));
+           _Symbol, g_status, OpenRiskMoney(), AccountInfoDouble(ACCOUNT_EQUITY) * InpMaxTotalRiskPct / 100.0));
 }
 //+------------------------------------------------------------------+
