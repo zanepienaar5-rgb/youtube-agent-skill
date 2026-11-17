@@ -104,6 +104,12 @@ touches your credentials.
 **Nothing invents a number.** If a skill wants a figure it does not have, it asks you for it or
 writes the line without it.
 
+## Also in this repo: EasyEquities
+
+[`plugins/easyequities`](plugins/easyequities) adds `/ee-brief`, a daily EasyEquities / Satrix
+portfolio brief, and `/ee-ask` for questions about your holdings. Install it with
+`/plugin install easyequities` after adding this marketplace.
+
 ## Licence
 
 MIT. Use it, change it, ship it.

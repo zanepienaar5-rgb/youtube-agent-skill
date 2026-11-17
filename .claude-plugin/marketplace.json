@@ -2,7 +2,10 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "youtube-agent-skill",
   "description": "The YouTube agent skill pack for Claude",
-  "owner": { "name": "Jake Schincariol", "url": "https://opusjake.ai" },
+  "owner": {
+    "name": "Jake Schincariol",
+    "url": "https://opusjake.ai"
+  },
   "plugins": [
     {
       "name": "youtube-agent",
@@ -10,6 +13,13 @@
       "source": "./",
       "category": "productivity",
       "homepage": "https://github.com/Jakeschincariol/youtube-agent-skill"
+    },
+    {
+      "name": "easyequities",
+      "description": "EasyEquities and Satrix in Claude: a daily portfolio brief (market moves split from your own deposits, movers, concentration, TFSA room) and live answers about holdings, dividends and transactions. Read-only.",
+      "source": "./plugins/easyequities",
+      "category": "productivity",
+      "homepage": "https://github.com/heinrich321/easyequities-mcp"
     }
   ]
 }

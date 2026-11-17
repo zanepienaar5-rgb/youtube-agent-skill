@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "easy-equities": {
+      "command": "uvx",
+      "args": [
+        "--python",
+        "3.13",
+        "--with",
+        "mcp[cli]<2",
+        "--from",
+        "git+https://github.com/heinrich321/easyequities-mcp",
+        "easy-equities-mcp"
+      ]
+    }
+  }
+}

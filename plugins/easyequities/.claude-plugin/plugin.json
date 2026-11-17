@@ -1,0 +1,7 @@
+{
+  "name": "easyequities",
+  "description": "EasyEquities and Satrix in Claude: a daily portfolio brief that splits market moves from your own deposits, tracks TFSA room for the tax year, and answers questions about your holdings, dividends and transactions. Read-only. Wraps the unofficial easy-equities MCP.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": ["easyequities", "satrix", "jse", "tfsa", "portfolio", "investing", "south-africa"]
+}
