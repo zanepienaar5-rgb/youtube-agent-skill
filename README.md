@@ -108,7 +108,7 @@ writes the line without it.
 
 [`plugins/easyequities`](plugins/easyequities) adds `/ee-brief`, a daily EasyEquities / Satrix
 portfolio brief, and `/ee-ask` for questions about your holdings. Install it with
-`/plugin install easyequities` after adding this marketplace.
+`/plugin install easyequities --marketplace zanepienaar5-rgb/youtube-agent-skill`.
 
 ## Licence
 

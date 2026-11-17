@@ -15,9 +15,11 @@ make day-on-day change possible, because EasyEquities only ever shows you the cu
 ## Install (Claude Code)
 
 ```
-/plugin marketplace add zanepienaar5-rgb/youtube-agent-skill
-/plugin install easyequities
+/plugin install easyequities --marketplace zanepienaar5-rgb/youtube-agent-skill
 ```
+
+(Older Claude Code: `/plugin marketplace add zanepienaar5-rgb/youtube-agent-skill`, then
+`/plugin install easyequities`.)
 
 Needs [`uv`](https://docs.astral.sh/uv/) on your PATH. The plugin launches the MCP with `uvx`, and
 uv fetches Python 3.13 itself if you don't have it.
