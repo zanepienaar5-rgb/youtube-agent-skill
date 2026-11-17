@@ -1,0 +1,7 @@
+{
+  "name": "kronos",
+  "description": "Probabilistic price paths from Kronos, the open-source candlestick foundation model (AAAI 2026), for JSE, US and EasyEquities tickers, with a built-in backtest against naive baselines so you know whether to trust it.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": ["kronos", "forecast", "jse", "candlestick", "time-series", "backtest"]
+}

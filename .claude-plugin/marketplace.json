@@ -2,7 +2,10 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "youtube-agent-skill",
   "description": "The YouTube agent skill pack for Claude",
-  "owner": { "name": "Jake Schincariol", "url": "https://opusjake.ai" },
+  "owner": {
+    "name": "Jake Schincariol",
+    "url": "https://opusjake.ai"
+  },
   "plugins": [
     {
       "name": "youtube-agent",
@@ -10,6 +13,30 @@
       "source": "./",
       "category": "productivity",
       "homepage": "https://github.com/Jakeschincariol/youtube-agent-skill"
+    },
+    {
+      "name": "easyequities",
+      "description": "EasyEquities and Satrix in Claude: a daily portfolio brief (market moves split from your own deposits, movers, concentration, TFSA room) and live answers about holdings, dividends and transactions. Read-only.",
+      "source": "./plugins/easyequities",
+      "category": "productivity",
+      "homepage": "https://github.com/heinrich321/easyequities-mcp"
+    },
+    {
+      "name": "kronos",
+      "description": "Kronos candlestick-model forecasts for JSE/US/EasyEquities tickers as a spread of sampled paths, with a backtest against naive baselines before you trust it.",
+      "source": "./plugins/kronos",
+      "category": "productivity",
+      "homepage": "https://github.com/shiyu-coder/Kronos"
+    },
+    {
+      "name": "day-trader-skill",
+      "description": "Jake Schincariol's 11 day-trading skills: scanner, news, entry and exit timing, a 10,000-run time machine, risk and budget managers, paper-first broker tickets, alerts, an earnings analyst and a Congress trade tracker. US markets.",
+      "source": {
+        "source": "github",
+        "repo": "Jakeschincariol/day-trader-skill"
+      },
+      "category": "productivity",
+      "homepage": "https://github.com/Jakeschincariol/day-trader-skill"
     }
   ]
 }
